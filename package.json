@@ -15,6 +15,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "nunjucks": "^2.3.0",
+    "osc-client-theta_s": "0.0.1",
     "serve-favicon": "~2.3.0"
   }
 }
