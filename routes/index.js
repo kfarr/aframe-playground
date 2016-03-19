@@ -7,83 +7,46 @@ router.get('/', function(req, res, next) {
 });
 */
 
+var pages = {
+  '1': {'name': '360 aframe iphone hack', url: '/360-mobile.html', description: '360° video playback using a-frame. Hack to make this work on iphone (for use with cardboard adapter). On iOS, you must save as an app on your homescreen before video object can be mapped to inner sphere texture with autoplay.'},
+  '2': {'name': '360 aframe no hack', url: '/360-aframe', description: '360° video playback using a-frame "native" video sphere.'},
+  '3': {'name': '360 bg still', url: '/360-still', description: '360° jpeg still using a-frame'},
+  '4': {'name': '360 bg still with video', url: '/360-still-video', description: '360° jpeg still with video in foreground'},
+  '5': {'name': '360 bg still with video iphone hack', url: '/360-still-video-hack', description: '360° jpeg still with video in foreground with iphone video hack'}
+}
+
+var media = {
+  '1': {'name': '360° mp4 equirectangular - scooting', 'path': '360Videos/sample-scooter-R0010118_er.mp4'}, // default
+  '2': {'name': '360° m4v dual fisheye - biking', 'path': '360Videos/sample-biking-R0010056_360.m4v'},
+  '3': {'name': '360° jpg equirectangular - reception', 'path': '360Photos/sample-reception-er-478325259.855159.jpg'},
+  '4': {'name': '360° jpg equirectangular - warehouse', 'path': '360Photos/warehouse-bg-IXWL1980.jpg'},
+  '5': {'name': '360° jpg equirectangular - crowd', 'path': '360Photos/crowd-478332738.104256.jpg'},
+  '6': {'name': '16:9 webm - big buck bunny', 'path': 'images/big-buck-bunny_trailer.webm'}
+}
 
 router.get('/', function(req, res, next) {
-
-
-  res.render('index.html');
+  res.render('index.html', {pages: pages});
 });
 
-router.get('/thetacapture', function(req, res, next) {
+router.get('/360-aframe', function(req, res, next) {
+  res.render('360-aframe.html', {media: media['1']});
+});
 
-    var fs = require('fs');
-    var ThetaSOscClient = require('osc-client-theta_s').ThetaSOscClient;
+router.get('/360-still', function(req, res, next) {
 
-    var domain = '192.168.1.1';
-    var port = '80';
+  function getRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
-    var thetaClient = new ThetaSOscClient(domain, port);
-    var sessionId;
-    var fileName;
+  res.render('360-still.html', {media: media[getRandomInteger(3, 5).toString()]});
+});
 
-    // module.exports = function (socket) {
-      thetaClient.startSession().then(function (res) {
-        //Grab the session id
-        sessionId = res.body.results.sessionId;
-        console.log('set options on theta client');
-        return thetaClient.setOptions(sessionId, {captureMode:"image"})
-      })
-      .then(function (res) {
-        console.log('starting capture');
-        return thetaClient.takePicture(sessionId);
-    //    return thetaClient.startCapture(sessionId);
+router.get('/360-still-video', function(req, res, next) {
+  res.render('360-still-video.html', {bg: media['4'], media: media['6']});
+});
 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      // Delay for camera to write image -- #TODO there has got to be a better way to do this
-      var interval = 8000;
-      // Number of keyframes to grab
-      var count = 3;
-
-      setTimeout(function () {
-        Promise.resolve()
-    //    console.log('stopping capture')/
-    //    thetaClient.stopCapture(sessionId)
-        .then(function (_res) {
-          console.log('running listall');
-          // need to get the unique video uri
-          return thetaClient.listAll({entryCount:1, sort:"newest"});
-        })
-        .then(function (res) {
-          fileName = res.body.results.entries[0].name;
-          console.log('res.body.results.entries' + res.body.results.entries);
-          console.log('running getimage on:');
-          console.log(fileName);
-          return thetaClient.getImage(res.body.results.entries[0].uri, "full");
-        })
-        .then(function (res) {
-          console.log('writing file called:');
-          console.log('./public/images/' + fileName);
-          fs.writeFile('./public/images/' + fileName, res.body);
-          //somehow emit the data through the socket to front end
-        })
-        .then(function (err) {
-          //don't close session yet
-          //call python script with the fileName
-          console.log('closing the session');
-          setTimeout(function () {res.redirect('/images/' + fileName);}, 1000);
-
-          return thetaClient.closeSession(sessionId);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }, interval);
-    // };
-
+router.get('/360-still-video-hack', function(req, res, next) {
+  res.render('360-still-video-hack.html', {bg: media['4'], media: media['6']});
 });
 
 module.exports = router;
