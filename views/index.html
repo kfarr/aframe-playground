@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 
+{% block script %}{% endblock script %}
+
 {% block content %}
 <h1>Aframe Playground</h1>
 
 <ul>
 {% for page in pages %}
-<li><a href="{{ page.url }}">{{ page.url }} - {{ page.name }}</a> {{ page.description }}</li>
+<li><a href="{{ page.url }}">{{ page.url }}</a> - <b>{{ page.name }}</b> - {{ page.description }}</li>
 {% endfor %}
+</ul>
 
 <p>This project has 2 goals:</p>
 <ul>
