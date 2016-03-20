@@ -22,3 +22,8 @@
   - display where i am looking to hud
 - get working on gearvr (iker)
 - try on PC DK2 / chromium
+
+## Inline video potential solutions:
+- https://github.com/newshorts/InlineVideo
+- https://github.com/mbebenita/Broadway
+- https://github.com/soliton4/BroadwayStream
