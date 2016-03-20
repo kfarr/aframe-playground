@@ -1,14 +1,26 @@
 {% extends 'layout.html' %}
 
-
-
 {% block content %}
 
 <a-scene>
+
   <a-assets>
     <img id="fsn" src="/images/fsn.png">
+    <img id="selector" src="/images/selector.png">
   </a-assets>
-  <a-image src="#fsn"></a-image>
+
+  <a-sky color="black"></a-sky>
+
+  <a-image src="#fsn" position="-2 2 0" rotation="0 45 0"></a-image>
+  <a-image src="#selector" position="2 2 0" rotation="0 -45 0"></a-image>
+
+  <a-box position="0 -1 -.5" scale="2 .5 2" color="gray"></a-box>
+
+  <a-box id="front-left" position="-.9 -.3 .4" scale=".6 .2 .6" color="orange" material="color:orange" geometry="primitive:box"></a-box>
+  <a-box id="front-right" position=".9 -.3 .4" scale=".6 .2 .6" color="orange" material="color:orange" geometry="primitive:box"></a-box>
+  <a-box id="back-right" position=".9 -.3 -1.3" scale=".6 .7 .6" color="orange" material="color:orange" geometry="primitive:box"></a-box>
+  <a-box id="back-left" position="-.9 -.3 -1.3" scale=".6 .5 .6" color="orange" material="color:orange" geometry="primitive:box"></a-box>
+
 </a-scene>
 
 {% endblock %}
