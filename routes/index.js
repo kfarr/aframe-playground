@@ -25,7 +25,43 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/fsn', function(req, res, next) {
-  res.render('fsn.html', {media: media, pages: pages});
+
+  // get list of files from current dir if not already populated
+  var path = './views'
+  var fs = require('fs');
+  var files = fs.readdirSync('./views');
+  console.log(files);
+
+  // what are # of files?
+  console.log(files.length);
+
+  // what should dimensions be for a given # of files to make a "square like" shape?
+  function getArrayDimensions(length) {
+    x = Math.round(Math.sqrt(length));
+    y = Math.ceil(Math.sqrt(length)); // this makes our boxes err on being "taller"
+    return { columns: x, rows: y };
+  }
+  var files_array_dimensions = getArrayDimensions(files.length);
+  console.log(files_array_dimensions);
+
+  var rows = files_array_dimensions['rows'];
+  var columns = files_array_dimensions['columns'];
+
+  var FILE_BOX_WIDTH = 0.6;
+  var FILE_BOX_BORDER = 0.1;
+
+  // create the directory "bounding" box to hold files based on dimensions
+  bounding_box_width = columns * FILE_BOX_WIDTH + (columns + 1 * FILE_BOX_BORDER);
+  bounding_box_length = rows * FILE_BOX_WIDTH + (rows + 1 * FILE_BOX_BORDER);
+  console.log("Bounding box Width: " + bounding_box_width + " Length: " + bounding_box_length);
+
+  // for(var i = 0; i < rows; i++) {
+  //     data.push(createSomeObject());
+  // }
+
+//  row {files, files, files}
+
+  res.render('fsn.html', {rows: rows, columns: columns, FILE_BOX_WIDTH: FILE_BOX_WIDTH, FILE_BOX_BORDER: FILE_BOX_BORDER, bounding_box_width: bounding_box_width, bounding_box_length: bounding_box_length});
 });
 
 router.get('/360-aframe', function(req, res, next) {
