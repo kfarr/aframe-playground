@@ -6,7 +6,9 @@ var pages = {
   '2': {'name': '360 aframe no hack', url: '/360-aframe', description: '360° video playback using a-frame "native" video sphere. This does not appear to work on either iOS nor Android Chrome '},
   '3': {'name': '360 bg still', url: '/360-still', description: '360° jpeg still using a-frame, works on all devices.'},
   '4': {'name': '360 bg still with video', url: '/360-still-video', description: '360° jpeg still with video in foreground, video does not play back on mobile.'},
-  '5': {'name': '360 bg still with video iphone hack', url: '/360-still-video-hack', description: '360° jpeg still with video in foreground with iphone video hack - work in progress to adapter gtk2k mobile hack to a non-360 video object (a plane with video texture)'}
+  '5': {'name': '360 bg still with video iphone hack', url: '/360-still-video-hack', description: '360° jpeg still with video in foreground with iphone video hack - work in progress to adapter gtk2k mobile hack to a non-360 video object (a plane with video texture)'},
+  '6': {'name': 'file system navigator', url: '/fsn', description: 'https://en.wikipedia.org/wiki/Fsn'},
+
 }
 
 var media = {
@@ -20,6 +22,10 @@ var media = {
 
 router.get('/', function(req, res, next) {
   res.render('index.html', {pages: pages});
+});
+
+router.get('/fsn', function(req, res, next) {
+  res.render('fsn.html', {media: media, pages: pages});
 });
 
 router.get('/360-aframe', function(req, res, next) {
