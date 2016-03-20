@@ -7,7 +7,7 @@ var pages = {
   '3': {'name': '360 bg still', url: '/360-still', description: '360° jpeg still using a-frame, works on all devices.'},
   '4': {'name': '360 bg still with video', url: '/360-still-video', description: '360° jpeg still with video in foreground, video does not play back on mobile.'},
   '5': {'name': '360 bg still with video iphone hack', url: '/360-still-video-hack', description: '360° jpeg still with video in foreground with iphone video hack - work in progress to adapter gtk2k mobile hack to a non-360 video object (a plane with video texture)'},
-  '6': {'name': 'file system navigator', url: '/fsn', description: 'https://en.wikipedia.org/wiki/Fsn'},
+  '6': {'name': 'file system navigator', url: '/fsn', description: '<a href="https://www.youtube.com/watch?v=dxIPcbmo1_U">It\'s a unix system!</a><a href=https://en.wikipedia.org/wiki/Fsn">FSN</a>'},
 
 }
 
