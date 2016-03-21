@@ -91,7 +91,8 @@ router.get('/fsn', function(req, res, next) {
     bounding_box_width: bounding_box_width,
     bounding_box_depth: bounding_box_depth,
     topleft_pos: topleft_pos,
-    req_query_path: req.query.path});
+    req_query_path: req.query.path,
+    path: path});
 });
 
 router.get('/360-aframe', function(req, res, next) {
