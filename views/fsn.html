@@ -54,7 +54,7 @@
   {% for row in files_array %}
     {% set row_loop_index0 = loop.index0 %}
     {% for column in row %}
-    <a-box id="filebox-row1-col{{ loop.index }}" onClick="location.href='?path={{ column.filename }}'" filename="{{ column.filename }}" position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) }}, {{ topleft_pos['y'] + 1 }}, {{ topleft_pos['z'] + (row_loop_index0 * FILE_BOX_DELTA) }}" scale=".6 .7 .6" color="{% if column.dir %}purple{% else %}orange{% endif %}">
+    <a-box id="filebox-row1-col{{ loop.index }}" {% if column.dir %}onClick="location.href='?path={% if req_query_path %}{{ req_query_path}}/{% endif %}{{ column.filename }}'"{% endif %} filename="{{ column.filename }}" position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) }}, {{ topleft_pos['y'] + 1 }}, {{ topleft_pos['z'] + (row_loop_index0 * FILE_BOX_DELTA) }}" scale=".6 .7 .6" color="{% if column.dir %}purple{% else %}orange{% endif %}">
       <a-event name="mouseenter" color="yellow"></a-event>
       <a-event name="mouseleave" color="{% if column.dir %}purple{% else %}orange{% endif %}"></a-event>
       <a-animation begin="click" attribute="rotation" to="0 360 0"
