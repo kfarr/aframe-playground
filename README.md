@@ -1,7 +1,9 @@
 # aframe-playground
 
 ## what does this do?
-* This is an experimental project to play with aframe
+This project has 2 goals:
+* A place for me to experiment with different ways to get video playback to work in aframe projects on ios and android
+* An example of a node.js / express / swig template "wrapper" for aframe projects that could be extended to include things like authentication, server logic, etc.
 
 ## how to use?
 * clone and run `npm install`
