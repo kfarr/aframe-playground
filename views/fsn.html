@@ -1,4 +1,8 @@
 {% extends 'layout.html' %}
+{% block script %}
+  {% parent %}
+  <script src="scripts/aframe-text-component/dist/aframe-text-component.min.js"></script>
+{% endblock %}
 
 {% block content %}
 
@@ -38,30 +42,43 @@
 
   <a-camera position="2 4 6" rotation="-36.440115770320375 31.97104496829994 0">
 
-    <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
+    <a-entity cursor="fuse: true; maxDistance: 30; timeout: 1500"
               position="0 0 -1"
               scale=".01 .01 .01"
               geometry="primitive: ring"
               material="color: red; shader: flat">
   </a-camera>
 
-  <!-- <a-entity text="text: What's up" size="10" color="pink"></a-entity> -->
-
   <a-box name="directory bounding box" position="-1 0 -1" scale="1 1 1" height="1" width="{{ bounding_box_width }}" depth="{{ bounding_box_depth }}" color="gray"></a-box>
 
   {% for row in files_array %}
     {% set row_loop_index0 = loop.index0 %}
     {% for column in row %}
-    <a-box id="filebox-row1-col{{ loop.index }}" filename="{{ column }}" position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) }}, {{ topleft_pos['y'] + 1 }}, {{ topleft_pos['z'] + (row_loop_index0 * FILE_BOX_DELTA) }}" scale=".6 .7 .6" color="orange">
+    <a-box id="filebox-row1-col{{ loop.index }}" onClick="location.href='?path={{ column.filename }}'" filename="{{ column.filename }}" position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) }}, {{ topleft_pos['y'] + 1 }}, {{ topleft_pos['z'] + (row_loop_index0 * FILE_BOX_DELTA) }}" scale=".6 .7 .6" color="{% if column.dir %}purple{% else %}orange{% endif %}">
       <a-event name="mouseenter" color="yellow"></a-event>
-      <a-event name="mouseleave" color="orange"></a-event>
+      <a-event name="mouseleave" color="{% if column.dir %}purple{% else %}orange{% endif %}"></a-event>
+      <a-animation begin="click" attribute="rotation" to="0 360 0"
+       -                       easing="linear" dur="2000" fill="backwards"></a-animation>
     </a-box>
+    <a-entity rotation="0 0 0" text="text: {{ column.filename }}" position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) - FILE_BOX_WIDTH / 2 }}, {{ topleft_pos['y'] + 1.75 }}, {{ topleft_pos['z'] - 0.25 + (row_loop_index0 * FILE_BOX_DELTA) + 0.5 * loop.index0 / columns * FILE_BOX_WIDTH }}" scale=".25 .25 .25" material="color: red"></a-entity>
     {% endfor %}
   {% endfor %}
 
-  <a-image src="#selector" position="{{ topleft_pos['x'] + FILE_BOX_DELTA }} .5 {{ topleft_pos['z'] + FILE_BOX_DELTA}}" rotation="90 0 0" width="{{ bounding_box_width }}" height="{{ bounding_box_depth }}" scale="1.75 1.75 1.75"></a-image>
-  <a-image src="#selector" position="{{ topleft_pos['x'] + FILE_BOX_DELTA }} -.5 {{ topleft_pos['z'] + FILE_BOX_DELTA}}" rotation="90 0 0" width="{{ bounding_box_width }}" height="{{ bounding_box_depth }}" scale="1.75 1.75 1.75"></a-image>
+  <a-image src="#selector" position="{{ topleft_pos['x'] + FILE_BOX_DELTA }} .5 {{ topleft_pos['z'] + FILE_BOX_DELTA}}" rotation="90 0 0" width="{{ bounding_box_width }}" height="{{ bounding_box_depth }}" scale="1.75 1.75 1.75">
+    <a-animation attribute="scale"
+                   to="2 2 2"
+                   dur="3000"
+                   fill="forwards"
+                   repeat="indefinite"></a-animation>
+  </a-image>
 
+  <!-- <a-image src="#selector" position="{{ topleft_pos['x'] + FILE_BOX_DELTA }} -.5 {{ topleft_pos['z'] + FILE_BOX_DELTA}}" rotation="90 0 0" width="{{ bounding_box_width }}" height="{{ bounding_box_depth }}" scale="1.75 1.75 1.75">
+    <a-animation attribute="scale"
+                   to="2 2 2"
+                   dur="3000"
+                   fill="forwards"
+                   repeat="indefinite"></a-animation>
+  </a-image> -->
 </a-scene>
 
 {% endblock %}

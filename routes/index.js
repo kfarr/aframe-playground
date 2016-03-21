@@ -28,7 +28,11 @@ router.get('/fsn', function(req, res, next) {
 
   // get list of files from current dir if not already populated
   // var path = './node_modules';
-  var path = './views';
+  // var path = './';
+  var path = './public/' + (req.query.path || '');
+
+  console.log("req.query.path:" + req.query.path);
+
   var fs = require('fs');
   var files = fs.readdirSync(path);
   console.log(files);
@@ -65,13 +69,14 @@ router.get('/fsn', function(req, res, next) {
     var row = [];
     for(var j = 0; j < columns; j++) {
       if (files.length > 0) {
-        var column = files.pop();
-        console.log("column: " + column);
-        console.log("files.length: " + files.length);
+        filename = files.pop();
+        var column = { filename: filename, dir: (filename.indexOf('.') === -1) };
+//        console.log("column: " + column);
+//        console.log("files.length: " + files.length);
         row.push(column);
       }
     };
-    console.log("row" + row);
+//    console.log("row" + row);
 
     files_array.push(row);
   };

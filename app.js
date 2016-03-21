@@ -27,6 +27,7 @@ app.use(favicons(__dirname + '/public/images/icons'));
 // allowing for many include possibilities
 app.use('/scripts/aframe', express.static(__dirname + './node_modules/aframe/'));
 app.use('/scripts/aframe/dist', express.static(__dirname + '/node_modules/aframe/dist/'));
+app.use('/scripts/aframe-text-component/dist', express.static(__dirname + '/node_modules/aframe-text-component/dist/'));
 
 
 
