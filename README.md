@@ -2,8 +2,8 @@
 
 ## what does this do?
 This project has 2 goals:
-* A place for me to experiment with different ways to get video playback to work in aframe projects on ios and android
-* An example of a node.js / express / swig template "wrapper" for aframe projects that could be extended to include things like authentication, server logic, etc.
+* A place to experiment with aframe things like getting video playback to work on mobile, creating new scratch projects
+* An example of a node.js / express / swig template "wrapper" for aframe projects that is ready to be extended to include things like authentication, server logic, etc.
 
 ## how to use?
 * clone and run `npm install`
