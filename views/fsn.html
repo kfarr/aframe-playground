@@ -16,8 +16,9 @@
 
   <a-sky color="black"></a-sky>
 
-  <a-image src="#fsn" position="-2 5 1" rotation="0 45 0"></a-image>
-  <a-image src="#jsn" position="2 5 1" rotation="0 -45 0" scale="1.6 .9 0"></a-image>
+  <!-- Reference Images for Creative Inspiration -->
+  <a-image visible="false" src="#fsn" position="-2 5 1" rotation="0 45 0"></a-image>
+  <a-image visible="false" src="#jsn" position="2 5 1" rotation="0 -45 0" scale="1.6 .9 0"></a-image>
 
   <!-- Original "Handdrawn" boxes -->
 
@@ -50,7 +51,8 @@
   </a-camera>
 
   <a-box name="directory bounding box" position="-1 0 -1" scale="1 1 1" height="1" width="{{ bounding_box_width }}" depth="{{ bounding_box_depth }}" color="gray"></a-box>
-
+  <a-entity rotation="0 0 0" text="text: {{ path }}" position="{{ topleft_pos['x'] }} 0 {{ topleft_pos['z'] + bounding_box_depth }}" material="color: red"></a-entity>
+<!-- position="{{ topleft_pos['x'] + (loop.index0 * FILE_BOX_DELTA) - FILE_BOX_WIDTH / 2 }}, {{ topleft_pos['y'] + 1.75 }}, {{ topleft_pos['z'] - 0.25 + (row_loop_index0 * FILE_BOX_DELTA) + 0.5 * loop.index0 / columns * FILE_BOX_WIDTH }}" -->
   {% for row in files_array %}
     {% set row_loop_index0 = loop.index0 %}
     {% for column in row %}
