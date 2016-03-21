@@ -1,22 +1,30 @@
 {% extends 'layout.html' %}
-
-{% block script %}{% endblock script %}
-
 {% block content %}
 <h1>Aframe Playground</h1>
-
 <ul>
-{% for page in pages %}
-<li><a href="{{ page.url }}">{{ page.url }}</a> - <b>{{ page.name }}</b> - {{ page.description }}</li>
-{% endfor %}
+  {% for page in pages %}
+  <li>
+    <a href="{{ page.url }}">{{ page.url }}</a> -
+    <strong>{{ page.name }}</strong> - {{ page.description }}
+  </li>
+  {% endfor %}
 </ul>
-
 <p>This project has 2 goals:</p>
 <ul>
-  <li>A place for me to experiment with different ways to get video playback to work in aframe projects on ios and android</li>
-  <li>An example of a node.js / express / swig template "wrapper" for aframe projects that could be extended to include things like authentication, server logic, etc.</li>
+  <li>
+    A place for me to experiment with different ways to get video playback
+    to work in aframe projects on ios and android
+  </li>
+  <li>
+    An example of a node.js / express / swig template "wrapper" for aframe
+    projects that could be extended to include things like authentication,
+    server logic, etc.
+    </li>
 </ul>
-
-<p>Modify this project: <a href="https://github.com/kfarr/aframe-playground">https://github.com/kfarr/aframe-playground</a></p>
-
+<p>
+  Modify this project:
+  <a href="https://github.com/kfarr/aframe-playground">
+    https://github.com/kfarr/aframe-playground
+  </a>
+</p>
 {% endblock %}
